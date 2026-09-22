@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="firebase_database_url" translatable="false" />
+  <string name="gcm_defaultSenderId" translatable="false">414424837544</string>
+  <string name="google_storage_bucket" translatable="false">xzremot.appspot.com</string>
+  <string name="project_id" translatable="false">xzremot</string>
+  <string name="google_app_id" translatable="false">1:414424837544:android:2b9b05d6f280c4cab7c19d</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDEsGqQDmV4D9w83uSdfsOES5wMptsyy4M</string>
+  <string name="google_api_key" translatable="false">AIzaSyDEsGqQDmV4D9w83uSdfsOES5wMptsyy4M</string>
+  <string name="default_web_client_id" translatable="false">414424837544-gmokhfjne55dki81mjkitk4hudjd5gc7.apps.googleusercontent.com</string>
+</resources>
